@@ -1,0 +1,25 @@
+// Write another function, pathFinder(directories, targetFile), that returns the path that contains the targetFile.
+// If the targetFile is not found in the directories, then return null.
+// You can assume the files are unique.
+//
+// Example using the same desktop from previously:
+//
+// pathFinder(desktop, 'trixie_lou.jpeg'));     // => '/images/pets/trixie_lou.jpeg'
+// pathFinder(desktop, 'everlong.flac'));       // => '/music/genres/rock/everlong.flac'
+// pathFinder(desktop, 'honeybadger.png'));     // => null
+
+// create path while going through directories
+
+function pathFinder(directories, targetFile) {
+    let dirArray = Object.keys(directories);
+    let path = '';
+    for(let i = 0; i < dirArray.length; i++) {
+        if (dirArray[i] === targetFile) {
+            return '/' + targetFile;
+        } else if (dirArray[i][0] === '/') {
+            let result = fileFinder(directories[dirArray[i]], targetFile);
+            if (result !== null) return dirArray[i] + result;
+        }
+    }
+    return null;
+}
